@@ -48,7 +48,7 @@
 				document.addEventListener("backbutton", function(e)
 				{
                 	$("#app-status-ul").append('<li>backbutton event received</li>');
-  					
+  			 navigator.notification.alert('helloo');
       				if( $("#home").length > 0)
 					{
 						// call this to get a new token each time. don't call it to reuse existing token.
