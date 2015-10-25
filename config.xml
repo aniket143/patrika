@@ -12,5 +12,8 @@ Digital Patrika    </description>
     <feature name="PushPlugin" >
     <param name="android-package" value="com.amazon.cordova.plugin.PushPlugin"/>
 </feature>
+<feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
     <access origin="*" />
 </widget>
