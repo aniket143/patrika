@@ -12,7 +12,7 @@
     <script src="scripts/platformOverrides.js"></script>
     <script src="lib/angular/angular.js"></script>
     <script src="lib/onsen/js/onsenui.js"></script>
-
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
@@ -61,8 +61,16 @@
 						navigator.app.backHistory();
 					}
 				}, false);
+if (device.platform == 'android' || device.platform == 'Android' || device.platform == 'amazon-fireos' ) 
+					{
+			pushNotification.register(successHandler, errorHandler, {"senderID":"661780372179","ecb":"onNotification"});		// required!
+					} 
+					else
+					 {
+        	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+                	}
 			
-			/*	try 
+	/*try 
 				{ 
                 	pushNotification = window.plugins.pushNotification;
 		      $("#app-status-ul").append('<li>registering ' + device.platform + '</li>');
@@ -78,8 +86,8 @@
 					txt="There was an error on this page.\n\n"; 
 					txt+="Error description: " + err.message + "\n\n"; 
 					alert(txt); 
-				} */
-            }
+				}   */
+				  }
             
             // handle APNS notifications for iOS
             function onNotificationAPN(e) {
