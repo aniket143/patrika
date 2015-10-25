@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<!-- CSP support mode (required for Windows Universal apps): https://docs.angularjs.org/api/ng/directive/ngCsp -->
+<html lang="en" ng-app="app" ng-csp>
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- JS dependencies (order matters!) -->
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+
+    <!-- CSS dependencies -->
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
+
+    <!-- CSP support mode (required for Windows Universal apps) -->
+    <link rel="stylesheet" href="lib/angular/angular-csp.css" />
+
+
+    <!-- --------------- App init --------------- -->
+
+    <title>Onsen UI Sliding Menu</title>
+
+    <script>
+  
+ons.bootstrap()
+
+.controller('DialogController', function($scope) {
+  $scope.dialogs = {};
+
+  $scope.show = function(dlg) {
+    if (!$scope.dialogs[dlg]) {
+      ons.createDialog(dlg).then(function(dialog) {
+        $scope.dialogs[dlg] = dialog;
+        dialog.show();
+      });
+    } else {
+      $scope.dialogs[dlg].show();
+    }
+  }
+});
+
+function home1()
+ {
+    window.location.href="home.html";
+}
+    </script>
+    
+    
+
+    <style>
+    
+    
+    
+   ons-dialog p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+input {
+  width: 100%;
+}
+
+        .page--menu-page__background {
+            background-color: #333;
+        }
+
+        .page--menu-page__content {
+            color: white;
+        }
+
+        .menu-close,
+        .menu-close > .toolbar-button {
+            color: #999;
+        }
+
+        .menu-list,
+        .menu-item:first-child,
+        .menu-item:last-child,
+        .menu-item {
+            background-color: transparent;
+            background-image: none !important;
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .menu-item {
+            padding: 0 0 0 20px;
+            line-height: 52px;
+            height: 52px;
+            text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 0px;
+        }
+
+            .menu-item:active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+        .menu-notification {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 14px;
+            height: 16px;
+            line-height: 16px;
+            min-width: 16px;
+            font-weight: 600;
+        }
+
+        .bottom-menu-list,
+        .bottom-menu-item:first-child,
+        .bottom-menu-item:last-child,
+        .bottom-menu-item {
+            border-color: #393939;
+            background-color: transparent;
+            background-image: none !important;
+            color: #ccc;
+        }
+
+            .bottom-menu-item:active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            
+        ons-carousel-item {
+  display: table;
+  text-align: center;
+}
+
+.item-label {
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+  line-height: 1;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.cover-label {
+  text-align: center;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  bottom: 10px;
+  color: white;
+}    
+            
+    </style>
+    
+    
+            
+    
+</head>
+
+<body>
+
+<ons-sliding-menu menu-page="menu.html" main-page="navigator.html" side="left"
+                      var="menu" type="reveal" max-slide-distance="260px" swipeable="true">
+    </ons-sliding-menu>
+
+   <ons-template id="menu.html">
+        <ons-page modifier="menu-page">
+            <ons-toolbar modifier="transparent"></ons-toolbar>
+
+            <ons-list class="menu-list">
+                <ons-list-item class="menu-item"  ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
+                    Next Page
+                </ons-list-item>
+         <br>
+       <ons-list class="bottom-menu-list">
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('page3.html', {closeMenu: true})">
+               <ons-icon icon="cog " size="20px " spin="true " fixed-width="true "></ons-icon> Settings   
+                   <div class="notification menu-notification">3</div>
+                </ons-list-item>
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('page4.html', {closeMenu: true})">
+                    <ons-icon icon="ion-ios-help" size="20px" fixed-width="true"></ons-icon>Help
+                </ons-list-item>
+<!--                 <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('page5.html', {closeMenu: true})"> -->
+                <ons-list-item class="bottom-menu-item" onclick="dialog();">
+                    Send feedback
+                </ons-list-item>
+            </ons-list>
+        </ons-page>
+    </ons-template>
+
+
+<ons-page>
+  <ons-toolbar>
+ <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+
+                </div>
+                
+                <div class="right">
+<ons-toolbar-button onclick="home1();">
+      <ons-icon icon="home" size="20px " spin="true " fixed-width="true "></ons-icon> Home
+    </ons-toolbar-button>
+      </div>
+    <div class="center">Dialog</div>
+  </ons-toolbar>
+  <ons-list ng-controller="DialogController">
+    <ons-list-item ng-click="show('login.html')" modifier="tappable">
+      Login form
+    </ons-list-item>
+    <ons-list-item ng-click="show('navigator.html')" modifier="tappable">
+      Navigator
+    </ons-list-item>
+    <ons-list-item ng-click="show('list.html')" modifier="tappable">
+      List
+    </ons-list-item>
+  </ons-list>
+</ons-page>
+
+<ons-template id="navigator.html">
+  <ons-dialog style="height: 160px;" var="naviDialog" cancelable>
+
+    <ons-navigator var="myNav">
+      <ons-toolbar inline>
+        <div class="center">
+          Navigator
+        </div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <p>
+          This is a dialog with a navigator.
+        </p>
+
+        <p>
+          <ons-button onclick="naviDialog.hide()">Close</ons-button>
+          <ons-button onclick="myNav.pushPage('next.html')">Next</ons-button>
+        </p>
+      </div>
+    </ons-navigator>
+  </ons-dialog>
+</ons-template>
+
+<ons-template id="login.html">
+  <ons-dialog var="dialog" cancelable>
+
+    <ons-toolbar inline>
+      <div class="center">
+        Login
+      </div>
+    </ons-toolbar>
+
+    <p>
+      <input placeholder="Username" id="username" class="text-input">
+    </p>
+
+    <p>
+      <input type="password" placeholder="Password" id="username" class="text-input">
+    </p>
+
+    <p>
+      <ons-button modifier="large" ng-click="dialog.hide()">Sign in</ons-button>
+    </p>
+
+  </ons-dialog>
+</ons-template>
+
+<ons-template id="list.html">
+  <ons-dialog var="dialog" cancelable>
+
+    <ons-list>
+      <ons-list-item modifier="tappable">
+        Foo
+      </ons-list-item>
+      <ons-list-item modifier="tappable">
+        Bar
+      </ons-list-item>
+      <ons-list-item modifier="tappable">
+        Hoge
+      </ons-list-item>
+    </ons-list>
+
+  </ons-dialog>
+</ons-template>
+
+<ons-template id="next.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Page 2</div>
+    </ons-toolbar>
+
+    <p style="text-align: center;">
+      <ons-button onclick="myNav.popPage()">Back</ons-button>
+    </p>
+  </ons-page>
+</ons-template>
+   
+</body>
+</html>
