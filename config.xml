@@ -8,5 +8,8 @@ Digital Patrika    </description>
     </author>
     <content src="index.html" />
     <plugin name="Notification" value="org.apache.cordova.Notification"/>
+    <feature name="PushPlugin" >
+    <param name="android-package" value="com.amazon.cordova.plugin.PushPlugin"/>
+</feature>
     <access origin="*" />
 </widget>
