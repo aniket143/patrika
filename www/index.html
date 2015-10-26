@@ -5,14 +5,20 @@
     <meta charset="utf-8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
 
-    <!-- JS dependencies (order matters!) -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+
             <script type="text/javascript" charset="utf-8" src="jquery_1.5.2.min.js"></script>
         <script type="text/javascript" src="PushNotification.js"></script>
     <script src="scripts/platformOverrides.js"></script>
     <script src="lib/angular/angular.js"></script>
     <script src="lib/onsen/js/onsenui.js"></script>
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" src="gcm.js"></script>
+
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
@@ -38,138 +44,6 @@
 		function fade(){  
  // window.location.href="home.html";
   }
-}
-
-/*ar pushNotification = window.plugins.pushNotification;
-
-pushNotification.register(
-    successHandler, 
-    errorHandler, 
-    {
-        'senderID':'your_sender_id',
-        'ecb':'onNotificationGCM' // callback function
-    }
-);
-// Android
-
-function successHandler(result) {
-    console.log('Success: '+ result);
-}
-
-function errorHandler(error) {
-    console.log('Error: '+ error);
-}
-
-
-function onNotificationGCM(e) {
-                alert('The room temperature is set too high')
-    switch(e.event){
-        case 'registered':
-            if (e.regid.length > 0){
-                deviceRegistered(e.regid);
-            }
-        break;
-
-        case 'message':
-            if (e.foreground){
-            	// When the app is running foreground. 
-                alert('The room temperature is set too high')
-            }
-        break;
-
-        case 'error':
-            console.log('Error: ' + e.msg);
-        break;
-
-        default:
-          console.log('An unknown event was received');
-          break;
-    }
-}
-*/
-var pushNotification;
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady(){
-    pushNotification = window.plugins.pushNotification;
-    if ( device.platform == 'android' || device.platform == 'Android' )
-    {
-    pushNotification.register(
-        successHandler,
-        errorHandler, {
-            "senderID":"replace_with_sender_id",
-            "ecb":"onNotificationGCM"
-        });
-    }
-}
-// Android
-function onNotificationGCM(e) {
-    $("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
- 
-    switch( e.event )
-    {
-    case 'registered':
-        if ( e.regid.length > 0 )
-        {
-            $("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
-            
-            console.log("regID = " + e.regid);
-        }
-    break;
- 
-    case 'message':
-        if ( e.foreground )
-        {
-            $("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
-            var my_media = new Media("/android_asset/www/"+e.soundname);
-            my_media.play();
-        }
-        else
-        { 
-            if ( e.coldstart )
-            {
-                $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
-            }
-            else
-            {
-                $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
-            }
-        }
- 
-        $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
-        $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
-    break;
- 
-    case 'error':
-        $("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
-    break;
- 
-    default:
-        $("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
-    break;
-  }
-}
-
-
-function onDeviceReady() {
-    $("#app-status-ul").append('<li>deviceready event received</li>');
- 
-    document.addEventListener("backbutton", function(e)
-    {
-        $("#app-status-ul").append('<li>backbutton event received</li>');
- 
-        if( $("#home").length > 0 )
-        {
-            e.preventDefault();
-            pushNotification.unregister(successHandler, errorHandler);
-            navigator.app.exitApp();
-        }
-        else
-        {
-            navigator.app.backHistory();
-        }
-    }, false);
- 
-    // aditional onDeviceReady work…
 }
 
     </script>
@@ -245,6 +119,17 @@ function onDeviceReady() {
  <img src="images/start.jpg"  style="width:100%;height:550px;">
   
    <center> <font size="5" color="#8F2122"> <b>!!! श्री. गणेशाय नमः   !!!</b></font> </center>
-     
+   
+  <div class="app">
+            <div id="temperature" class="gears"></div>
+            <div id="deviceready">
+                <p class="channel blink">Registering Device ID...</p>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/PushNotification.js"></script>
+        <script type="text/javascript" src="js/pubnub.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+	
  </body>
  </html>
