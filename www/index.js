@@ -19,7 +19,8 @@ function main() {
 
     var pushNotification = window.plugins.pushNotification;
 
-   pushNotification.register(successHandler, errorHandler, {'senderID':'837099162939','ecb':'onNotificationGCM'});
+ //  pushNotification.register(successHandler, errorHandler, {'senderID':'837099162939','ecb':'onNotificationGCM'});
+   pushNotification.register(successHandler, errorHandler, {'senderID':'1010018101342','ecb':'onNotificationGCM'});
   					alert('hello11');
 
 }
