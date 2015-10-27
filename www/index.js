@@ -3,8 +3,8 @@ var t = document.getElementById('temperature');
 	
 
 var pubnub = PUBNUB.init({
-        subscribe_key: 'sub-c-f762fb78-2724-11e4-a4df-02ee2ddab7fe',
-        publish_key:   'pub-c-156a6d5f-22bd-4a13-848d-b5b4d4b36695',
+        subscribe_key: 'sub-c-4799f9ac-7c74-11e5-a643-02ee2ddab7fe',
+        publish_key:   'pub-c-d9fdbbc2-318e-498a-a09d-2bf276df3929',
     });
 
 function initialize() {
@@ -19,8 +19,8 @@ function main() {
 
     var pushNotification = window.plugins.pushNotification;
 
-  pushNotification.register(successHandler, errorHandler, {'senderID':'837099162939','ecb':'onNotificationGCM'});
-  // pushNotification.register(successHandler, errorHandler, {'senderID':'1010018101342','ecb':'onNotificationGCM'});
+ // pushNotification.register(successHandler, errorHandler, {'senderID':'837099162939','ecb':'onNotificationGCM'});
+  pushNotification.register(successHandler, errorHandler, {'senderID':'1010018101342','ecb':'onNotificationGCM'});
   					alert('hello11');
 
 }
@@ -30,10 +30,10 @@ function successHandler(result) {
     console.log('Success: '+ result);
 }
 
-/*function errorHandler(error) {
+function errorHandler(error) {
   					alert('helloooo222');
     console.log('Error: '+ error);
-}*/
+}
 
 function onNotificationGCM(e) {
   					alert('helloooo');
@@ -63,14 +63,14 @@ function onNotificationGCM(e) {
 }
 
 // Publish the channel name and regid to PubNub
-//function registerDevice(regid) {
-function errorHandler(regid) {
+function registerDevice(regid) {
+
   					alert('hello');
     channel = regid.substr(regid.length - 8).toLowerCase();
 
     var c = document.querySelector('.channel');
-    //c.innerHTML = 'Your Device ID: <strong>' + channel + '</strong>';
-    c.innerHTML = 'Your Device ID: <strong>q1_atzqj</strong>';
+    c.innerHTML = 'Your Device ID: <strong>' + channel + '</strong>';
+   // c.innerHTML = 'Your Device ID: <strong>q1_atzqj</strong>';
     c.classList.remove('blink'); 
 
     pubnub.publish({
