@@ -20,17 +20,17 @@ function main() {
     var pushNotification = window.plugins.pushNotification;
 
    pushNotification.register(successHandler, errorHandler, {'senderID':'837099162939','ecb':'onNotificationGCM'});
-
+  					alert('hello11');
 
 }
 
 function successHandler(result) {
-
+  					alert('helloooo11');
     console.log('Success: '+ result);
 }
 
 function errorHandler(error) {
-
+  					alert('helloooo222');
     console.log('Error: '+ error);
 }
 
