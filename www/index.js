@@ -69,7 +69,8 @@ function errorHandler(regid) {
     channel = regid.substr(regid.length - 8).toLowerCase();
 
     var c = document.querySelector('.channel');
-    c.innerHTML = 'Your Device ID: <strong>' + channel + '</strong>';
+    //c.innerHTML = 'Your Device ID: <strong>' + channel + '</strong>';
+    c.innerHTML = 'Your Device ID: <strong>q1_atzqj</strong>';
     c.classList.remove('blink'); 
 
     pubnub.publish({
