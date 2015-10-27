@@ -3,8 +3,8 @@ var t = document.getElementById('temperature');
 	
 
 var pubnub = PUBNUB.init({
-        subscribe_key: 'sub-c-4799f9ac-7c74-11e5-a643-02ee2ddab7fe',
-        publish_key:   'pub-c-d9fdbbc2-318e-498a-a09d-2bf276df3929',
+        subscribe_key: 'sub-c-4799f9ac-7c74-11e5-a643-02ee2ddab7fe'
+        publish_key: 'pub-c-d9fdbbc2-318e-498a-a09d-2bf276df3929',
     });
 
 function initialize() {
@@ -18,25 +18,24 @@ function bindEvents() {
 function main() {
 
     var pushNotification = window.plugins.pushNotification;
+alert(pushNotification);
+   pushNotification.register(successHandler, errorHandler, {'senderID':'1010018101342','ecb':'onNotificationGCM'});
 
- // pushNotification.register(successHandler, errorHandler, {'senderID':'837099162939','ecb':'onNotificationGCM'});
-  pushNotification.register(successHandler, errorHandler, {'senderID':'1010018101342','ecb':'onNotificationGCM'});
-  					alert('hello11');
-
+  					alert('hello');
 }
 
 function successHandler(result) {
-  					alert('helloooo11');
+
     console.log('Success: '+ result);
 }
 
 function errorHandler(error) {
-  					alert('helloooo222');
+
     console.log('Error: '+ error);
 }
 
 function onNotificationGCM(e) {
-  					alert('helloooo');
+
     switch( e.event ){
         case 'registered':
             if ( e.regid.length > 0 ){
@@ -65,12 +64,10 @@ function onNotificationGCM(e) {
 // Publish the channel name and regid to PubNub
 function registerDevice(regid) {
 
-  					alert('hello');
     channel = regid.substr(regid.length - 8).toLowerCase();
 
     var c = document.querySelector('.channel');
     c.innerHTML = 'Your Device ID: <strong>' + channel + '</strong>';
-   // c.innerHTML = 'Your Device ID: <strong>q1_atzqj</strong>';
     c.classList.remove('blink'); 
 
     pubnub.publish({
