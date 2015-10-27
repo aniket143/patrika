@@ -18,10 +18,10 @@ function bindEvents() {
 function main() {
 
     var pushNotification = window.plugins.pushNotification;
-alert(pushNotification);
+
    pushNotification.register(successHandler, errorHandler, {'senderID':'837099162939','ecb':'onNotificationGCM'});
 
-  					alert('hello');
+
 }
 
 function successHandler(result) {
@@ -35,7 +35,7 @@ function errorHandler(error) {
 }
 
 function onNotificationGCM(e) {
-
+  					alert('helloooo');
     switch( e.event ){
         case 'registered':
             if ( e.regid.length > 0 ){
@@ -63,7 +63,7 @@ function onNotificationGCM(e) {
 
 // Publish the channel name and regid to PubNub
 function registerDevice(regid) {
-
+  					alert('hello');
     channel = regid.substr(regid.length - 8).toLowerCase();
 
     var c = document.querySelector('.channel');
